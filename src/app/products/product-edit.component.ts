@@ -22,28 +22,33 @@ export class ProductEditComponent implements OnInit {
                 private router: Router ) { }
 
     ngOnInit(): void {
-        // const id = +this.route.snapshot.params['id'];
-        // this.getProduct(id);
-        // we can use snapshot or observable
-        this.route.params.subscribe(
-           params => {
-               let id = +params['id'];
-               this.getProduct(id);
-           }
-        )
+    //     const id = +this.route.snapshot.params['id'];
+    //     this.getProduct(id);
+    //    // we can use snapshot or observable
+    //     this.route.params.subscribe(
+    //        params => {
+    //            let id = +params['id'];
+    //            this.getProduct(id);
+    //        }
+    //     );
+    // with resolver snapshot
+    // this.onProductRetrieved(this.route.snapshot.data['product']);
+        // with resolver subscribe
+        this.route.data.subscribe(data => {
+            this.onProductRetrieved(data['product']);
+        });
     }
 
-    getProduct(id: number): void {
-        this.productService.getProduct(id)
-            .subscribe(
-                (product: IProduct) => this.onProductRetrieved(product),
-                (error: any) => this.errorMessage = <any>error
-            );
-    }
+    // getProduct(id: number): void {
+    //     this.productService.getProduct(id)
+    //         .subscribe(
+    //             (product: IProduct) => this.onProductRetrieved(product),
+    //             (error: any) => this.errorMessage = <any>error
+    //         );
+    // }
 
     onProductRetrieved(product: IProduct): void {
         this.product = product;
-
         if (this.product.id === 0) {
             this.pageTitle = 'Add Product';
         } else {

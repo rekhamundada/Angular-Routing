@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var login_component_1 = require("./login.component");
 var auth_service_1 = require("./auth.service");
+var login_component_1 = require("./login.component");
 var shared_module_1 = require("../shared/shared.module");
 var UserModule = (function () {
     function UserModule() {

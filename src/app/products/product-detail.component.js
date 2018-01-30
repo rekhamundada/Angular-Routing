@@ -11,23 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var router_2 = require("@angular/router");
-var product_service_1 = require("./product.service");
+// import { ProductService } from './product.service';
 var ProductDetailComponent = (function () {
-    function ProductDetailComponent(productService, route, router) {
-        this.productService = productService;
+    function ProductDetailComponent(
+        // private productService: ProductService ,
+        route, router) {
         this.route = route;
         this.router = router;
         this.pageTitle = 'Product Detail';
-        console.log(this.route.snapshot.params['id']);
+        // console.log(this.route.snapshot.params['id']);
     }
     ProductDetailComponent.prototype.ngOnInit = function () {
-        var id = +this.route.snapshot.params['id'];
-        this.getProduct(id);
+        // const id = +this.route.snapshot.params['id'];
+        // this.getProduct(id);
+        this.product = this.route.snapshot.data['product'];
     };
-    ProductDetailComponent.prototype.getProduct = function (id) {
-        var _this = this;
-        this.productService.getProduct(id).subscribe(function (product) { return _this.product = product; }, function (error) { return _this.errorMessage = error; });
-    };
+    // getProduct(id: number) {
+    //     this.productService.getProduct(id)
+    //     .subscribe(
+    //         product => this.product = product,
+    //         error => this.errorMessage = <any>error);
+    // }
     ProductDetailComponent.prototype.onBack = function () {
         this.router.navigate(['/products']);
     };
@@ -37,8 +41,7 @@ ProductDetailComponent = __decorate([
     core_1.Component({
         templateUrl: './app/products/product-detail.component.html'
     }),
-    __metadata("design:paramtypes", [product_service_1.ProductService,
-        router_1.ActivatedRoute,
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_2.Router])
 ], ProductDetailComponent);
 exports.ProductDetailComponent = ProductDetailComponent;

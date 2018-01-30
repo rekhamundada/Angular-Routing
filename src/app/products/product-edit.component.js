@@ -22,19 +22,29 @@ var ProductEditComponent = (function () {
     }
     ProductEditComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // const id = +this.route.snapshot.params['id'];
-        // this.getProduct(id);
-        // we can use snapshot or observable
-        this.route.params.subscribe(function (params) {
-            var id = +params['id'];
-            _this.getProduct(id);
+        //     const id = +this.route.snapshot.params['id'];
+        //     this.getProduct(id);
+        //    // we can use snapshot or observable
+        //     this.route.params.subscribe(
+        //        params => {
+        //            let id = +params['id'];
+        //            this.getProduct(id);
+        //        }
+        //     );
+        // with resolver snapshot
+        // this.onProductRetrieved(this.route.snapshot.data['product']);
+        // with resolver subscribe
+        this.route.data.subscribe(function (data) {
+            _this.onProductRetrieved(data['product']);
         });
     };
-    ProductEditComponent.prototype.getProduct = function (id) {
-        var _this = this;
-        this.productService.getProduct(id)
-            .subscribe(function (product) { return _this.onProductRetrieved(product); }, function (error) { return _this.errorMessage = error; });
-    };
+    // getProduct(id: number): void {
+    //     this.productService.getProduct(id)
+    //         .subscribe(
+    //             (product: IProduct) => this.onProductRetrieved(product),
+    //             (error: any) => this.errorMessage = <any>error
+    //         );
+    // }
     ProductEditComponent.prototype.onProductRetrieved = function (product) {
         this.product = product;
         if (this.product.id === 0) {
